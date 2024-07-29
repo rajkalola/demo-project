@@ -1,0 +1,39 @@
+<h4>Employee List from child:</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Mobile No</th>
+      <th>EmployeeID</th>
+      <th>Designation</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="EmpListFromChild.length > 0">
+    <tr *ngFor="let employee of EmpListFromChild; let i = index">
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.address }}</td>
+      <td>{{ employee.mobile }}</td>
+      <td>{{ employee.employeeID }}</td>
+      <td>{{ employee.designation }}</td>
+      <td>
+        <button (click)="editEmployee(i)">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div style="margin-bottom: 10px;">
+
+    <b> {{serviceInfo}} </b><br>
+</div>
+<form [formGroup]="employeeForm" (ngSubmit)="addOrUpdateEmployee()">
+  <label>Name: <input formControlName="name" /></label><br>
+  <label>Address: <input formControlName="address" /></label><br>
+  <label>Mobile No: <input formControlName="mobile" /></label><br>
+  <label>Employee ID: <input formControlName="employeeID" /></label><br>
+  <label>Designation: <input formControlName="designation" /></label><br>
+  <button type="submit">{{ editMode ? 'Update Employee' : 'Add Employee' }}</button>
+  <button type="button" *ngIf="editMode" (click)="cancelEdit()">Cancel</button>
+</form>
